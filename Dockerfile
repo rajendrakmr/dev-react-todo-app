@@ -2,9 +2,7 @@
 FROM node:20 AS baseImgage
 
 WORKDIR /app
-
 COPY . .
-
 RUN npm install 
 
 RUN npm run build 
