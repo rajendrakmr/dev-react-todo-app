@@ -7,6 +7,15 @@ COPY . .
 
 RUN npm install 
 
-EXPOSE 3000
+RUN npm run build 
 
-CMD [ "npm","run" ,"start"]
+#stage2
+FROM nginx:alpine AS production
+
+WORKDIR /app
+
+COPY --from=baseImgage /app/build  ./app/usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx","-g" ,"daemon off;"]
